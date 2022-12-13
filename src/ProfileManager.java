@@ -66,6 +66,10 @@ public class ProfileManager {
 
     }
 
+    public void leaveNetwork(String name) {
+
+    }
+
     /*
     public List<Profile> getFriends(Profile user) {
         List<Profile> l = new ArrayList<>();
