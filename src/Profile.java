@@ -8,7 +8,7 @@ public class Profile {
     private String name;
     // user's current status
     private String status;
-    // auxilary list of friends for easy access
+    // auxiliary list of friends for easy access
     private List<String> friends;
 
     /**
@@ -24,7 +24,7 @@ public class Profile {
     }
 
     /**
-     * Adds another user to the auxillary list of friends
+     * Adds another user to the auxiliary list of friends
      * @param name is the name of the friend to add
      */
     public void addFriend(String name) {
@@ -72,13 +72,16 @@ public class Profile {
     }
 
     /**
-     *
-     * @param status
+     * Set the user's status
+     * @param status is the new status provided by the user
      */
     public void setStatus(String status) {
         this.status = status;
     }
 
+    /**
+     * Prints out the user's profile.
+     */
     public void displayProfile() {
         System.out.println("Name:    " + name);
         System.out.println("User ID: " + id);

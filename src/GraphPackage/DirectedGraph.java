@@ -7,8 +7,8 @@ import java.util.Iterator;
 
 public class DirectedGraph<T> implements GraphInterface<T>
 {
-    private DictionaryInterface<T, VertexInterface<T>> vertices;
-    private int edgeCount;
+    protected DictionaryInterface<T, VertexInterface<T>> vertices;
+    protected int edgeCount;
 
     public DirectedGraph()
     {
@@ -117,6 +117,39 @@ public class DirectedGraph<T> implements GraphInterface<T>
                 vertexQueue.dequeue();
         } // end while
 
+
+        return traversalOrder;
+    } // end getBreadthFirstTraversal
+
+    public QueueInterface<T> getBreadthFirstTraversal(T origin, int depth)
+    {
+        int curDepth = 0;
+        int numNeighbors;
+        resetVertices();
+        QueueInterface<T> traversalOrder = new LinkedQueue<>();               // Queue of vertex labels
+        QueueInterface<VertexInterface<T>> vertexQueue = new LinkedQueue<>();
+
+        VertexInterface<T> originVertex = vertices.getValue(origin);
+        originVertex.visit();
+        traversalOrder.enqueue(origin); // Enqueue vertex label
+        vertexQueue.enqueue(originVertex); // Enqueue vertex
+
+
+
+        while (!vertexQueue.isEmpty() && curDepth <= depth)
+        {
+            VertexInterface<T> topVertex = vertexQueue.getFront();
+            VertexInterface<T> nextNeighbor = topVertex.getUnvisitedNeighbor();
+
+            if (nextNeighbor != null)
+            {
+                nextNeighbor.visit();
+                traversalOrder.enqueue(nextNeighbor.getLabel());
+                vertexQueue.enqueue(nextNeighbor);
+            }
+            else // All neighbors are visited
+                vertexQueue.dequeue();
+        } // end while
 
         return traversalOrder;
     } // end getBreadthFirstTraversal

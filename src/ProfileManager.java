@@ -44,7 +44,7 @@ public class ProfileManager {
     }
 
     public void listProfiles() {
-
+        for (Integer k : profiles.keySet()) System.out.println(profiles.get(k).getName());
     }
 
     public void addFriend(Profile friendToAdd) {
@@ -63,6 +63,23 @@ public class ProfileManager {
     }
 
     public void displayFriendNetwork(Profile user) {
+        QueueInterface<Profile> f;
+        Profile cur;
+        System.out.println("User: " + user.getName());
+        System.out.println("Friends:");
+        System.out.println();
+        f = relationships.getBreadthFirstTraversal(user);
+        while (!f.isEmpty()) {
+            cur = f.dequeue();
+            System.out.println(cur.getName());
+        }
+        System.out.println();
+        System.out.println("Friends of friends:");
+        f = relationships.getBreadthFirstTraversal(user,2);
+        while (!f.isEmpty()) {
+            cur = f.dequeue();
+            System.out.println(cur.getName());
+        }
 
     }
 
