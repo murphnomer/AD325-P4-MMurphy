@@ -22,8 +22,9 @@ public class SocialNetworkMain {
             System.out.println("2. Log in (view a user profile)");
             System.out.println("3. Display full user profile");
             System.out.println("4. Update status (modify the current user profile)");
-            System.out.println("5. Add friends");
-            System.out.println("6. Leave the network (delete user profile)");
+            System.out.println("5. Display " + pm.getCurrentUser().getName() + "'s friend network");
+            System.out.println("6. Add friends");
+            System.out.println("7. Leave the network (delete user profile)");
             System.out.println("9. Log out");
             System.out.println();
 
@@ -51,6 +52,8 @@ public class SocialNetworkMain {
                     pm.currentUser.setStatus(status);
                     break;
                 case 5:
+                    pm.displayFriendNetwork();
+                case 6:
                     System.out.println("Here's a list of the profiles currently in the network:");
                     pm.listProfiles();
                     System.out.println();
@@ -63,7 +66,7 @@ public class SocialNetworkMain {
                         System.out.println("Couldn't find a user named " + name);
                     }
                     break;
-                case 6:
+                case 7:
                     System.out.println("Goodbye! Thanks for using Mikebook!");
                     pm.leaveNetwork(pm.currentUser.getName());
                     break;

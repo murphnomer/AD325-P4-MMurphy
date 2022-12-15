@@ -56,6 +56,14 @@ public class ProfileManager {
     }
 
     /**
+     * Returns the currently logged in user
+     * @return is the profile of the current user
+     */
+    public Profile getCurrentUser() {
+        return currentUser;
+    }
+
+    /**
      * Sets the current user
      * @param name is the name of the user to set current
      * @return is the Profile of the account with the specified id
@@ -114,6 +122,13 @@ public class ProfileManager {
         relationships.addEdge(user1, user2);
         user1.addFriend(user2.getName());
         user2.addFriend(user1.getName());
+    }
+
+    /**
+     * Prints out the friend network of the current user
+     */
+    public void displayFriendNetwork() {
+        displayFriendNetwork(currentUser);
     }
 
     /**
