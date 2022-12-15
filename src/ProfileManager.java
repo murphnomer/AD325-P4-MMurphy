@@ -184,7 +184,7 @@ public class ProfileManager {
 
     public void leaveNetwork() {
         // remove the current user from the master list
-        profiles.remove(currentUser);
+        profiles.remove(currentUser.getId());
 
         // and also from the friend network
         relationships.removeVertex(currentUser);
