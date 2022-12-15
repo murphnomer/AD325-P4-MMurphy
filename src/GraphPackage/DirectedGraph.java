@@ -22,6 +22,10 @@ public class DirectedGraph<T> implements GraphInterface<T>
         return addOutcome == null; // Was addition to dictionary successful?
     } // end addVertex
 
+    public void removeVertex(T vertexLabel) {
+        vertices.remove(vertexLabel);
+    }
+
     public boolean addEdge(T begin, T end, double edgeWeight)
     {
         boolean result = false;
@@ -37,7 +41,7 @@ public class DirectedGraph<T> implements GraphInterface<T>
     public boolean addEdge(T begin, T end)
     {
         return addEdge(begin, end, 0);
-    } // end addEdge
+    }// end addEdge
 
     public boolean hasEdge(T begin, T end)
     {
@@ -93,13 +97,29 @@ public class DirectedGraph<T> implements GraphInterface<T>
 
     public QueueInterface<T> getBreadthFirstTraversal(T origin)
     {
+        return getBreadthFirstTraversal(origin, 0, 10000);
+    } // end getBreadthFirstTraversal
+
+    /**
+     * Alternate version of Breadth First Traversal allowing only certain radii from the origin to be selected.
+     * @param origin is the node at which to start the traversal
+     * @param startDepth is the distance from the origin at which to start tracking nodes. 0 is the origin itself,
+     *                   1 is immediate neighbors of the origin, and so on
+     * @param endDepth is the depth at which to stop tracking nodes.  If greater than the depth of the entire graph,
+     *                 the whole graph will be traversed.
+     * @return is a queue containing the nodes in traversed order.
+     */
+    public QueueInterface<T> getBreadthFirstTraversal(T origin, int startDepth, int endDepth)
+    {
         resetVertices();
         QueueInterface<T> traversalOrder = new LinkedQueue<>();               // Queue of vertex labels
         QueueInterface<VertexInterface<T>> vertexQueue = new LinkedQueue<>();
 
+        int curDepth = 1;
+
         VertexInterface<T> originVertex = vertices.getValue(origin);
         originVertex.visit();
-        traversalOrder.enqueue(origin); // Enqueue vertex label
+        if (curDepth > startDepth) traversalOrder.enqueue(origin); // Enqueue vertex label
         vertexQueue.enqueue(originVertex); // Enqueue vertex
 
         while (!vertexQueue.isEmpty())
@@ -110,46 +130,15 @@ public class DirectedGraph<T> implements GraphInterface<T>
             if (nextNeighbor != null)
             {
                 nextNeighbor.visit();
-                traversalOrder.enqueue(nextNeighbor.getLabel());
-                vertexQueue.enqueue(nextNeighbor);
+                if (curDepth >= startDepth) traversalOrder.enqueue(nextNeighbor.getLabel());
+                if (curDepth < endDepth) vertexQueue.enqueue(nextNeighbor);
             }
-            else // All neighbors are visited
+            else { // All neighbors are visited
+                curDepth++;
                 vertexQueue.dequeue();
+            }
         } // end while
 
-
-        return traversalOrder;
-    } // end getBreadthFirstTraversal
-
-    public QueueInterface<T> getBreadthFirstTraversal(T origin, int depth)
-    {
-        int curDepth = 0;
-        int numNeighbors;
-        resetVertices();
-        QueueInterface<T> traversalOrder = new LinkedQueue<>();               // Queue of vertex labels
-        QueueInterface<VertexInterface<T>> vertexQueue = new LinkedQueue<>();
-
-        VertexInterface<T> originVertex = vertices.getValue(origin);
-        originVertex.visit();
-        traversalOrder.enqueue(origin); // Enqueue vertex label
-        vertexQueue.enqueue(originVertex); // Enqueue vertex
-
-
-
-        while (!vertexQueue.isEmpty() && curDepth <= depth)
-        {
-            VertexInterface<T> topVertex = vertexQueue.getFront();
-            VertexInterface<T> nextNeighbor = topVertex.getUnvisitedNeighbor();
-
-            if (nextNeighbor != null)
-            {
-                nextNeighbor.visit();
-                traversalOrder.enqueue(nextNeighbor.getLabel());
-                vertexQueue.enqueue(nextNeighbor);
-            }
-            else // All neighbors are visited
-                vertexQueue.dequeue();
-        } // end while
 
         return traversalOrder;
     } // end getBreadthFirstTraversal

@@ -68,14 +68,18 @@ public class ProfileManager {
         System.out.println("User: " + user.getName());
         System.out.println("Friends:");
         System.out.println();
-        f = relationships.getBreadthFirstTraversal(user);
+        f = relationships.getBreadthFirstTraversal(user, 1, 1);
+        // remove the user from the list since they shouldn't appear in the list of their own friends
+        //f.dequeue();
         while (!f.isEmpty()) {
             cur = f.dequeue();
             System.out.println(cur.getName());
         }
         System.out.println();
         System.out.println("Friends of friends:");
-        f = relationships.getBreadthFirstTraversal(user,2);
+        f = relationships.getBreadthFirstTraversal(user,2, 2);
+        // remove the user from the list since they shouldn't appear in the list of their own friends
+        //f.dequeue();
         while (!f.isEmpty()) {
             cur = f.dequeue();
             System.out.println(cur.getName());
@@ -84,6 +88,14 @@ public class ProfileManager {
     }
 
     public void leaveNetwork(String name) {
+        Profile p = profiles.get(Math.abs(name.hashCode()));
+
+        profiles.remove(p);
+        relationships.removeVertex(p);
+
+        for (Profile prof : profiles.values()) {
+            prof.removeFriend(prof.getName());
+        }
 
     }
 

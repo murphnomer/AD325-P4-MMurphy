@@ -3,6 +3,8 @@ package GraphPackage;
 
 import ADTPackage.StackInterface;
 
+import java.util.List;
+
 public class UndirectedGraph<T> extends DirectedGraph<T> implements GraphInterface<T>
 {
     public UndirectedGraph()
