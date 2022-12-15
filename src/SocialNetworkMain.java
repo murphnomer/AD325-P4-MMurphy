@@ -53,6 +53,7 @@ public class SocialNetworkMain {
                     break;
                 case 5:
                     pm.displayFriendNetwork();
+                    break;
                 case 6:
                     System.out.println("Here's a list of the profiles currently in the network:");
                     pm.listProfiles();
