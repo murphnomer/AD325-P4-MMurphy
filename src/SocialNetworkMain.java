@@ -1,10 +1,16 @@
+import java.util.Scanner;
+
 public class SocialNetworkMain {
     public static void main(String[] args) {
         ProfileManager pm = new ProfileManager();
+        Scanner in = new Scanner(System.in);
+
+        String name;
+        String status;
 
         int choice = 0;
 
-        test();
+        //test();
 
         while (choice != 9) {
 
@@ -13,11 +19,50 @@ public class SocialNetworkMain {
             System.out.println();
             System.out.println("1. Join network (create a new profile)");
             System.out.println("2. Log in (view a user profile)");
-            System.out.println("3. Update status (modify the current user profile)");
-            System.out.println("4. Add friends");
-            System.out.println("5. Leave the network (delete user profile)");
+            System.out.println("3. Display full user profile");
+            System.out.println("4. Update status (modify the current user profile)");
+            System.out.println("5. Add friends");
+            System.out.println("6. Leave the network (delete user profile)");
             System.out.println("9. Log out");
+            System.out.println();
 
+            choice = in.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Please enter your name:");
+                    name = in.next();
+                    pm.join(name);
+                    break;
+                case 2:
+                    pm.listProfiles();
+                    System.out.println("Enter the name of the user to log in:");
+                    name = in.next();
+                    pm.setCurrentUser(name);
+                    break;
+                case 3:
+                    pm.displayCurrentUser();
+                case 4:
+                    pm.displayCurrentUser();
+                    System.out.println("Enter new status:");
+                    status = in.next();
+                    pm.currentUser.setStatus(status);
+                    break;
+                case 5:
+                    System.out.println("Here's a list of the profiles currently in the network:");
+                    pm.listProfiles();
+                    System.out.println();
+                    System.out.println("Please enter a user to befriend:");
+                    name = in.next();
+                    pm.addFriend(pm.getUser(name));
+                    break;
+                case 6:
+                    System.out.println("Goodbye! Thanks for using Mikebook!");
+                    pm.leaveNetwork(pm.currentUser.getName());
+                    break;
+                case 9:
+                    System.out.println("Thanks for managing your future with Mikebook! See you next time!");
+            }
         }
     }
 

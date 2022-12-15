@@ -39,17 +39,27 @@ public class ProfileManager {
         relationships.addVertex(p);
 
         // set the current user to the new one if there is not already a current user
-        if (currentUser == null) setCurrentUser(p.getId());
+        if (currentUser == null) setCurrentUser(p.getName());
 
         return p;
     }
 
     /**
+     * Gets a specified user profile by name
+     * @param name is the name of the user to retrieve
+     * @return is the profile of the specified user
+     */
+    public Profile getUser(String name) {
+        return profiles.get(Math.abs(name.hashCode()));
+    }
+
+    /**
      * Sets the current user
-     * @param id is the user id (hashcode of the name)
+     * @param name is the name of the user to set current
      * @return is the Profile of the account with the specified id
      */
-    public Profile setCurrentUser(Integer id) {
+    public Profile setCurrentUser(String name) {
+        int id = Math.abs(name.hashCode());
         if (profiles.containsKey(id)) {
             currentUser = profiles.get(id);
         } else {
