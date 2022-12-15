@@ -1,6 +1,24 @@
 public class SocialNetworkMain {
     public static void main(String[] args) {
+        ProfileManager pm = new ProfileManager();
 
+        int choice = 0;
+
+        test();
+
+        while (choice != 9) {
+
+            System.out.println("Welcome to Mikebook, the social network!");
+            System.out.println("Please choose from the following options:");
+            System.out.println();
+            System.out.println("1. Join network (create a new profile)");
+            System.out.println("2. Log in (view a user profile)");
+            System.out.println("3. Update status (modify the current user profile)");
+            System.out.println("4. Add friends");
+            System.out.println("5. Leave the network (delete user profile)");
+            System.out.println("9. Log out");
+
+        }
     }
 
     public static void test() {
