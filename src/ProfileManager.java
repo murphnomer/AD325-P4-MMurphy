@@ -50,7 +50,9 @@ public class ProfileManager {
      * @return is the profile of the specified user
      */
     public Profile getUser(String name) {
-        return profiles.get(Math.abs(name.hashCode()));
+        Profile p = null;
+        if (profiles.containsKey(Math.abs(name.hashCode()))) p = profiles.get(Math.abs(name.hashCode()));
+        return p;
     }
 
     /**

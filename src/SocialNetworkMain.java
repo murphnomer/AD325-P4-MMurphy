@@ -4,6 +4,7 @@ public class SocialNetworkMain {
     public static void main(String[] args) {
         ProfileManager pm = new ProfileManager();
         Scanner in = new Scanner(System.in);
+        Profile p = null;
 
         String name;
         String status;
@@ -54,7 +55,12 @@ public class SocialNetworkMain {
                     System.out.println();
                     System.out.println("Please enter a user to befriend:");
                     name = in.next();
-                    pm.addFriend(pm.getUser(name));
+                    p = pm.getUser(name);
+                    if (p != null) {
+                        pm.addFriend(pm.getUser(name));
+                    } else {
+                        System.out.println("Couldn't find a user named " + name);
+                    }
                     break;
                 case 6:
                     System.out.println("Goodbye! Thanks for using Mikebook!");
