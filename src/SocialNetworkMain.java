@@ -9,13 +9,18 @@ public class SocialNetworkMain {
         String name;
         String status;
 
+        System.out.println("Welcome to Mikebook, the social network!");
+        System.out.println("Please enter your name to create a profile to get started:");
+        name = in.next();
+        pm.join(name);
+
         int choice = 0;
 
         //test();
 
         while (choice != 9) {
 
-            System.out.println("Welcome to Mikebook, the social network!");
+            System.out.println("Welcome " + pm.getCurrentUser().getName() + "!");
             System.out.println("Please choose from the following options:");
             System.out.println();
             System.out.println("1. Join network (create a new profile)");
@@ -70,6 +75,11 @@ public class SocialNetworkMain {
                 case 7:
                     System.out.println("Goodbye! Thanks for using Mikebook!");
                     pm.leaveNetwork();
+                    System.out.println("No current user is set, here are a list of available profiles:");
+                    pm.listProfiles();
+                    System.out.println("Please choose a new profile to log in:");
+                    name = in.next();
+                    pm.setCurrentUser(name);
                     break;
                 case 9:
                     System.out.println("Thanks for managing your future with Mikebook! See you next time!");
