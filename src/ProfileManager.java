@@ -182,6 +182,9 @@ public class ProfileManager {
 
     }
 
+    /**
+     * Removes the current user from the network
+     */
     public void leaveNetwork() {
         // remove the current user from the master list
         profiles.remove(currentUser.getId());
