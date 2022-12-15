@@ -69,7 +69,7 @@ public class SocialNetworkMain {
                     break;
                 case 7:
                     System.out.println("Goodbye! Thanks for using Mikebook!");
-                    pm.leaveNetwork(pm.currentUser.getName());
+                    pm.leaveNetwork();
                     break;
                 case 9:
                     System.out.println("Thanks for managing your future with Mikebook! See you next time!");

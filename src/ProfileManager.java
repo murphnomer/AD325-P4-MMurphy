@@ -177,8 +177,24 @@ public class ProfileManager {
 
         // also remove it from any of the direct friend tracking structures
         for (Profile prof : profiles.values()) {
-            prof.removeFriend(prof.getName());
+            prof.removeFriend(p.getName());
         }
+
+    }
+
+    public void leaveNetwork() {
+        // remove the current user from the master list
+        profiles.remove(currentUser);
+
+        // and also from the friend network
+        relationships.removeVertex(currentUser);
+
+        // also remove it from any of the direct friend tracking structures
+        for (Profile prof : profiles.values()) {
+            prof.removeFriend(currentUser.getName());
+        }
+
+        currentUser = null;
 
     }
 
