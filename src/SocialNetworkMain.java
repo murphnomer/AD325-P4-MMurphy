@@ -43,6 +43,7 @@ public class SocialNetworkMain {
                     break;
                 case 3:
                     pm.displayCurrentUser();
+                    break;
                 case 4:
                     pm.displayCurrentUser();
                     System.out.println("Enter new status:");
